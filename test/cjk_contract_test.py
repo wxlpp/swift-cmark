@@ -13,6 +13,15 @@ cases = [
     ('`中文**“原文”**`', '<p><code>中文**“原文”**</code></p>\n'),
     (r'中文\*\*“原文”\*\*', '<p>中文**“原文”**</p>\n'),
 ]
+
+for selector in range(0xFE00, 0xFE0F):
+    cases.append((f'中{chr(selector)}**“文”**后', f'<p>中{chr(selector)}<strong>“文”</strong>后</p>\n'))
+cases += [
+    ('中\uFE0F**“文”**后', '<p>中\uFE0F**“文”**后</p>\n'),
+    ('中\U000E0100**“文”**后', '<p>中\U000E0100<strong>“文”</strong>后</p>\n'),
+    ('\U0002A6E0**“文”**后', '<p>\U0002A6E0<strong>“文”</strong>后</p>\n'),
+]
+
 strict = subprocess.check_output([binary], input=cases[0][0], text=True)
 assert '<strong>' not in strict and '**' in strict, 'strict mode unexpectedly relaxed'
 for source, expected in cases:

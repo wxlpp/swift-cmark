@@ -26,3 +26,9 @@ python3 tools/generate-cjk-tables.py --check
 ## 上游维护
 
 上游安全修复优先合入，并重新执行以上门禁、Swift 桥接以及下游平台测试。每次 Unicode 更新须显式更新 manifest、生成区间和分类负例。禁止覆盖已发布 tag。上游原生支持等价选项后，在明确版本迁移中切回官方 URL；不静默更换同 identity 的远程来源。
+
+## 第一轮代码评审处置
+
+独立 checkpoint 评审 REVISE，未发现 flanking 分类实现偏离，但指出三项验证缺口。已改为显式异常校验 manifest/输入/输出，python -O 不会移除发布门禁；PropList.White_Space 与 Zs+四项 CommonMark 空白做独立集合交叉校验；增加 FE00–FE0E、FE0F、IVS 和未分配宽字符 U+2A6E0 的明确 HTML 断言。
+
+旧生成器在 -O 下对损坏表仍退出 0 的问题已复现（/tmp/cjk-generator-red-evidence.log）。新门禁损坏版本、SHA、输出三种场景均拒绝；25 项明确行为及既有 golden/GFM/长 delimiter 通过。生成的 C 表和运行时 C 实现未改变，先前 API/规范运行结果可复用。
