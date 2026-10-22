@@ -6,6 +6,7 @@
 #define CMARK_NO_SHORT_NAMES
 #include <cmark-gfm.h>
 #include "node.h"
+#include "../src/cjk.h"
 #include <cmark-gfm-core-extensions.h>
 
 #include "harness.h"
@@ -1579,12 +1580,56 @@ static void table_spans(test_batch_runner *runner) {
   }
 }
 
+
+static void cjk_emphasis(test_batch_runner *runner) {
+  const char *samples[] = {
+    "中**“文”**后", "字**\"重点\"**字", "a**〰**a", "a__中文__b",
+    "中\xef\xb8\x80**\"文\"**后", "中\xef\xb8\x8f**\"文\"**后",
+    "中\xf3\xa0\x84\x80**\"文\"**后", "中\xff**文**后"
+  };
+  int options = CMARK_OPT_CJK_FRIENDLY_EMPHASIS | CMARK_OPT_VALIDATE_UTF8 | CMARK_OPT_SOURCEPOS;
+  for (size_t i = 0; i < sizeof(samples) / sizeof(samples[0]); ++i) {
+    const char *source = samples[i];
+    size_t size = strlen(source);
+    cmark_node *whole = cmark_parse_document(source, size, options);
+    char *expected = cmark_render_xml(whole, options);
+    for (size_t split = 0; split <= size; ++split) {
+      cmark_parser *parser = cmark_parser_new(options);
+      cmark_parser_feed(parser, source, split);
+      cmark_parser_feed(parser, source + split, size - split);
+      cmark_node *node = cmark_parser_finish(parser);
+      char *actual = cmark_render_xml(node, options);
+      STR_EQ(runner, actual, expected, "CJK byte-feed boundaries retain AST and source positions");
+      free(actual);
+      cmark_node_free(node);
+      cmark_parser_free(parser);
+    }
+    if (i == 0) {
+      cmark_node *strong = cmark_node_next(cmark_node_first_child(cmark_node_first_child(whole)));
+      INT_EQ(runner, cmark_node_get_type(strong), CMARK_NODE_STRONG, "CJK strong node");
+      INT_EQ(runner, cmark_node_get_start_column(strong), 4, "original UTF8 start column");
+      INT_EQ(runner, cmark_node_get_end_column(strong), 16, "original UTF8 end column");
+    }
+    free(expected);
+    cmark_node_free(whole);
+  }
+  const int32_t nonspaces[] = {0xB, 0x85, 0x2028, 0x2029};
+  for (size_t i = 0; i < sizeof(nonspaces) / sizeof(nonspaces[0]); ++i)
+    OK(runner, !CMARK_CJK_CLASSIFY(space, nonspaces[i]), "CommonMark whitespace excludes %x", nonspaces[i]);
+  OK(runner, CMARK_CJK_CLASSIFY(cjk, 0x1160), "neutral-width Hangul is CJK");
+  OK(runner, CMARK_CJK_CLASSIFY(cjk, 0x31350), "non-BMP CJK");
+  OK(runner, !CMARK_CJK_CLASSIFY(cjk, 0x1F600), "default emoji is not CJK");
+  OK(runner, cmark_cjk_fullwidth(0x201C, 0xFE01), "fullwidth ambiguous punctuation sequence");
+  OK(runner, !cmark_cjk_fullwidth(0x201C, 0xFE02), "vertical Sibe variant is not fullwidth");
+}
+
 int main() {
   int retval;
   test_batch_runner *runner = test_batch_runner_new();
 
   cmark_enable_safety_checks(true);
   version(runner);
+  cjk_emphasis(runner);
   constructor(runner);
   accessors(runner);
   node_check(runner);

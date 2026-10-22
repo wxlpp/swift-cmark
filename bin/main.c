@@ -55,6 +55,7 @@ void print_usage() {
   printf("  --hardbreaks      Treat newlines as hard line breaks\n");
   printf("  --nobreaks        Render soft line breaks as spaces\n");
   printf("  --unsafe          Render raw HTML and dangerous URLs\n");
+  printf("  --cjk-friendly-emphasis  Enable CJK emphasis rules\n");
   printf("  --smart           Use smart punctuation\n");
   printf("  --validate-utf8   Replace UTF-8 invalid sequences with U+FFFD\n");
   printf("  --github-pre-lang Use GitHub-style <pre lang> for code blocks\n");
@@ -185,6 +186,8 @@ int main(int argc, char *argv[]) {
       options |= CMARK_OPT_HARDBREAKS;
     } else if (strcmp(argv[i], "--nobreaks") == 0) {
       options |= CMARK_OPT_NOBREAKS;
+    } else if (strcmp(argv[i], "--cjk-friendly-emphasis") == 0) {
+      options |= CMARK_OPT_CJK_FRIENDLY_EMPHASIS;
     } else if (strcmp(argv[i], "--smart") == 0) {
       options |= CMARK_OPT_SMART;
     } else if (strcmp(argv[i], "--github-pre-lang") == 0) {

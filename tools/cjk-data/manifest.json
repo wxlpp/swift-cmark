@@ -1,0 +1,96 @@
+{
+  "unicodeVersion": "18.0.0",
+  "referenceRevision": "71d6b25d406a31d0303b102d582bd675067ed73f",
+  "inputs": [
+    {
+      "path": "test/cjk-fixtures/strong.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/strong.md",
+      "sha256": "5bab64ce978e528186d0c76112eccc3c9f36566302eadfe859863c64d69158d4"
+    },
+    {
+      "path": "test/cjk-fixtures/underscore-cjk-punct.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/underscore-cjk-punct.md",
+      "sha256": "380c9732d08257308ce57e1926a9a8e18eda1ee07f1d65c2e388b834b5207eff"
+    },
+    {
+      "path": "test/cjk-fixtures/korean.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/korean.md",
+      "sha256": "d2469b03f81e4c89392c8aacd80ea1a1bddd5d72f73c53c8e34de2522ce7b909"
+    },
+    {
+      "path": "test/cjk-fixtures/non-bmp.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/non-bmp.md",
+      "sha256": "c24fc5d790ab400942e4e1534790bcc49d50f02036d4d4ac1589595aef0c7007"
+    },
+    {
+      "path": "test/cjk-fixtures/pseudo-emoji.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/pseudo-emoji.md",
+      "sha256": "219c89743e5177c86a3ed35b7b5590128959618f5282ed89026f455794e34e50"
+    },
+    {
+      "path": "test/cjk-fixtures/gfm-non-cjk.md",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/testcases/gfm-non-cjk.md",
+      "sha256": "c4d388ad7b28c0d36f0e9271de4ca20532ba1db2bfa0b8226c83741ba0e3f78f"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/EastAsianWidth.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/EastAsianWidth.txt",
+      "sha256": "a0cf29eacd00cfcaec4381c6b7c281685f18dbb4e7ff82b4076ccb342ca839aa"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/Scripts.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Scripts.txt",
+      "sha256": "0071fd81b6aeae25f6e8bce8efec3066a6476a91b49bdb2f52dc76e817862a6a"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/StandardizedVariants.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/StandardizedVariants.txt",
+      "sha256": "c7ae634a7e2bb0932258548a1e81df984fbb38e30cecf4269391d6a4f94581ac"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/emoji/emoji-data.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/emoji/emoji-data.txt",
+      "sha256": "80d00f8e616a0ef27fd6b8de3b758c06383b5d917e2977709578e68baf733bf1"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/LICENSE.txt",
+      "url": "https://www.unicode.org/license.txt",
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/Blocks.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt",
+      "sha256": "a58f8d322f3c5e254f9f97b1cbf76a454a7e02de6ac35619a5e4f27aaabfd553"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/UnicodeData.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt",
+      "sha256": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/PropList.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/PropList.txt",
+      "sha256": "f438f532e8737bb8a2702126cdf9c4af5e357c58c7acf9d9eb2fc7c1a1d955d6"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/emoji/emoji-variation-sequences.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/emoji/emoji-variation-sequences.txt",
+      "sha256": "ff1707564aa1f1b2fcf4ec92d609d4cb26940bc0d4dcf07f5328ad6879e84da3"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/emoji/emoji-sequences.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/emoji/emoji-sequences.txt",
+      "sha256": "1823dce71f3dd9cb0ad1976797baee4ffbdc1909756f43af8ce4c57f732843a4"
+    },
+    {
+      "path": "tools/cjk-data/18.0.0/emoji/emoji-test.txt",
+      "url": "https://www.unicode.org/Public/18.0.0/emoji/emoji-test.txt",
+      "sha256": "8f3735cda1f92a779d78af67cf86066bb1f07143dc22f2ac29394d9bc57ab21a"
+    },
+    {
+      "path": "test/cjk-fixtures/LICENSE",
+      "url": "https://raw.githubusercontent.com/tats-u/markdown-cjk-friendly/71d6b25d406a31d0303b102d582bd675067ed73f/LICENSE",
+      "sha256": "e10f2bca78e49ccdad88766032efcb50d16f7ac898a975e20c8cbbe3e81e8599"
+    }
+  ]
+}

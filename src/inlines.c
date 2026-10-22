@@ -1,3 +1,4 @@
+#include "cjk.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -429,7 +430,7 @@ static cmark_node *handle_backticks(subject *subj, int options) {
 static int scan_delims(cmark_parser *parser, subject *subj, unsigned char c,
                        bool *can_open, bool *can_close) {
   int numdelims = 0;
-  bufsize_t before_char_pos, after_char_pos;
+  bufsize_t before_char_pos = 0, after_char_pos;
   int32_t after_char = 0;
   int32_t before_char = 0;
   int len;
@@ -474,6 +475,19 @@ static int scan_delims(cmark_parser *parser, subject *subj, unsigned char c,
     if (len == -1 || (after_char < 256 && parser->skip_chars[(unsigned char) after_char])) {
       after_char = 10;
     }
+  }
+
+  if ((parser->options & CMARK_OPT_CJK_FRIENDLY_EMPHASIS) && (c == '*' || c == '_')) {
+    int32_t previous_base = before_char;
+    if (before_char >= 0xFE00 && before_char <= 0xFE0E && before_char_pos > 0) {
+      bufsize_t base_pos = before_char_pos - 1;
+      while (base_pos > 0 && (subj->input.data[base_pos] >> 6) == 2) --base_pos;
+      if (cmark_utf8proc_iterate(subj->input.data + base_pos,
+                                before_char_pos - base_pos, &previous_base) < 0)
+        previous_base = before_char;
+    }
+    cmark_cjk_flanking(c, before_char, previous_base, after_char, can_open, can_close);
+    return numdelims;
   }
 
   left_flanking = numdelims > 0 && !cmark_utf8proc_is_space(after_char) &&

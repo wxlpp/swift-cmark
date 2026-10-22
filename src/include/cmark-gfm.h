@@ -732,6 +732,9 @@ char *cmark_render_latex_with_mem(cmark_node *root, int options, int width, cmar
  */
 #define CMARK_OPT_DEFAULT 0
 
+/** Opt-in CJK-friendly emphasis flanking; preserves original input and source positions. */
+#define CMARK_OPT_CJK_FRIENDLY_EMPHASIS (1 << 22)
+
 /**
  * ### Options affecting rendering
  */
