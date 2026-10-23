@@ -2,7 +2,7 @@
 
 ## 来源与边界
 
-基于 swiftlang/swift-cmark 正式 0.9.0（08ddb528923cc1a6527e02b7a1aee9e516ca749a）。计划发布本维护分支 0.9.1，目前未发布。它与官方包 identity/module/C 符号相同，是互斥替代，不能在同一个依赖图并存。
+基于 swiftlang/swift-cmark 正式 0.9.0（08ddb528923cc1a6527e02b7a1aee9e516ca749a）。本维护分支已发布 0.9.1，固定 tag 指向 `17ad3e9b113f7747a5822ac00bc0efca2c15e628`；后续维护文档提交不覆盖该 tag。它与官方包 identity/module/C 符号相同，是互斥替代，不能在同一个依赖图并存。
 
 仅添加 `CMARK_OPT_CJK_FRIENDLY_EMPHASIS`（bit 22）控制的 delimiter flanking 分类；不修改匹配栈、原文或来源位置。默认关闭。CLI 对应 `--cjk-friendly-emphasis`。不改变删除线扩展。
 
@@ -22,7 +22,7 @@ python3 tools/generate-cjk-tables.py --check
 python3 test/cjk_generator_test.py
 ```
 
-本地结果：严格规范 670 项；API 815 项（包括多字节中间分段、非法 UTF8 清洗、原文来源位置）；7 项明确行为、5 个社区 golden 文件、非 CJK GFM 开关一致、10 万字符 delimiter 有界验证通过。不会将这些结果称作 Swift 桥接或 App 验证。
+本地结果：严格规范 670 项；API 815 项（包括多字节中间分段、非法 UTF8 清洗、原文来源位置）；25 项明确行为、5 个社区 golden 文件、非 CJK GFM 开关一致、10 万字符 delimiter 有界验证通过。不会将这些结果称作 Swift 桥接或 App 验证。
 
 ## 上游维护
 
